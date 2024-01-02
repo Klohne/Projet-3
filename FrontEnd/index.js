@@ -17,6 +17,15 @@ fetch("http://localhost:5678/api/works")
                 // Création des boutons de filtre
                 createFilterButtons(categories, allProjects);
             });
+            // Vérification du localStorage pour le token
+            const token = localStorage.getItem('token');
+            if (token && typeof filtersContainer !== 'undefined') {
+                // Le token est stocké, vous pouvez effectuer les actions nécessaires
+                editionMode();
+                console.log('Connexion au mode edition réussie')
+            }else{
+                console.log('Connexion echouée')
+            }
     });
 
 // Fonction pour afficher les projets
@@ -69,4 +78,17 @@ function createFilterButtons(categories, allProjects) {
 
     const portfolioSection = document.getElementById('portfolio');
     portfolioSection.insertBefore(filtersContainer, document.querySelector('.gallery'));
+}
+
+// Fonction pour afficher la page d'édition
+
+function editionMode(){
+
+    localStorage.getItem('token');
+    filtersContainer.style.visibility = "hidden"
+
+    const btnModif = document.createElement('p')
+    btnModif.innerText = 'Modifier'
+    portfolioSection.appendChild(btnModif)
+    portfolioSection.insertBefore(btnModif, document.querySelector('.filters-container'));
 }

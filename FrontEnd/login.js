@@ -1,8 +1,7 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('login-form');
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('mdp');
-    const errorMsgHolder = document.getElementById('login-error-msg-holder');
     const errorMsg = document.getElementById('login-error-msg');
 
     loginForm.addEventListener('submit', function(event) {
@@ -16,7 +15,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (emailValue === '' || passwordValue === '') {
             errorMsg.innerText = 'Veuillez remplir tous les champs.';
             errorMsg.style.opacity = "1";
-        }else {
+        }/* else if (emailValue != email || passwordValue != password) {
+            errorMsg.style.opacity = "1";
+        } */else {
             // Création de l'objet à envoyer
             const formData = {
                 email: emailValue,
@@ -31,14 +32,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 body: JSON.stringify(formData)
             })
-            .then(response => {
-                if (response.ok) {
-                    // Redirection vers index.html en cas de connexion réussie
-                    window.location.href = 'index.html';
-                } else {
-                    errorMsg.style.opacity = "1";
-                }
-                
+            .then(tokenResponse => {
+                // Stockage du token d'authentification dans le localStorage
+                localStorage.setItem('token', tokenResponse.token);
+                console.log(localStorage)
+                // Redirection vers index.html en cas de connexion réussie
+                window.location.href = 'index.html';
+            })
+            .catch(error => {
+                console.error(error);
             });
         }
     });
