@@ -170,6 +170,14 @@ li:hover {
 	color: white;
 }
 
+.portfolio-head{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	background: white;
+}
+
 .gallery {
 	width: 100%;
 	display: grid;

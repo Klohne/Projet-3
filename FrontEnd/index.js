@@ -18,14 +18,7 @@ fetch("http://localhost:5678/api/works")
                 createFilterButtons(categories, allProjects);
             });
             // Vérification du localStorage pour le token
-            const token = localStorage.getItem('token');
-            if (token && typeof filtersContainer !== 'undefined') {
-                // Le token est stocké, vous pouvez effectuer les actions nécessaires
-                editionMode();
-                console.log('Connexion au mode edition réussie')
-            }else{
-                console.log('Connexion echouée')
-            }
+            
     });
 
 // Fonction pour afficher les projets
@@ -51,6 +44,45 @@ function displayProjects(projects) {
 function createFilterButtons(categories, allProjects) {
     const filtersContainer = document.createElement("div");
     filtersContainer.classList.add("filters-container");
+
+    const portfolioSection = document.getElementById('portfolio');
+    portfolioSection.insertBefore(filtersContainer, document.querySelector('.gallery'));
+
+    // Fonction pour afficher la page d'édition
+
+    function editionMode(){
+
+        filtersContainer.style.visibility = "hidden";
+
+        const btnModif = document.createElement('p');
+        btnModif.innerText = 'modifier';
+        btnModif.style.margin = '0 0 25px 7px';
+        btnModif.style.cursor = 'pointer';
+
+        const editionDiv = document.createElement('div');
+        editionDiv.classList.add('portfolio-head');
+        editionDiv.appendChild(document.querySelector('.portfolio-title'));
+        editionDiv.appendChild(btnModif);
+        portfolioSection.appendChild(editionDiv);
+        portfolioSection.insertBefore(editionDiv, document.querySelector('.filters-container'));;
+
+        const iconModif = document.createElement('i');
+        iconModif.classList.add('fa-regular', 'fa-pen-to-square');
+        iconModif.style.margin = '0 0 25px 25px';
+        btnModif.style.cursor = 'pointer';
+        editionDiv.appendChild(iconModif);
+        editionDiv.insertBefore(iconModif, btnModif);
+    }
+
+    const token = localStorage.getItem('token');
+    if (token) {
+        // Le token est stocké, vous pouvez effectuer les actions nécessaires
+        editionMode();
+        console.log('Connexion au mode edition réussie')
+    }else{
+        console.log('Connexion echouée')
+    }
+
     
     // Bouton "Tous"
     const btnTous = document.createElement("button");
@@ -75,20 +107,5 @@ function createFilterButtons(categories, allProjects) {
         });
         filtersContainer.appendChild(btnFilters);
     });
-
-    const portfolioSection = document.getElementById('portfolio');
-    portfolioSection.insertBefore(filtersContainer, document.querySelector('.gallery'));
 }
 
-// Fonction pour afficher la page d'édition
-
-function editionMode(){
-
-    localStorage.getItem('token');
-    filtersContainer.style.visibility = "hidden"
-
-    const btnModif = document.createElement('p')
-    btnModif.innerText = 'Modifier'
-    portfolioSection.appendChild(btnModif)
-    portfolioSection.insertBefore(btnModif, document.querySelector('.filters-container'));
-}
