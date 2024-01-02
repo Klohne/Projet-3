@@ -14,9 +14,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Validation des champs
         if (emailValue === '' || passwordValue === '') {
-            errorMsg.textContent = 'Veuillez remplir tous les champs.';
-            errorMsgHolder.style.display = 'block';
-        } else {
+            errorMsg.innerText = 'Veuillez remplir tous les champs.';
+            errorMsg.style.opacity = "1";
+        }else {
             // Création de l'objet à envoyer
             const formData = {
                 email: emailValue,
