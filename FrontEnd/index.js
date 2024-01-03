@@ -48,7 +48,16 @@ function createFilterButtons(categories, allProjects) {
     const portfolioSection = document.getElementById('portfolio');
     portfolioSection.insertBefore(filtersContainer, document.querySelector('.gallery'));
 
-    // Fonction pour afficher la page d'édition
+    // Mode édition / admin de l'index
+    const token = sessionStorage.getItem('token');
+    if (token) {
+        // Le token est stocké, vous pouvez effectuer les actions nécessaires
+        editionMode();
+        console.log('Connexion au mode edition réussie')
+        console.log(token)
+    }else{
+        console.log('Connexion echouée')
+    }
 
     function editionMode(){
 
@@ -72,18 +81,10 @@ function createFilterButtons(categories, allProjects) {
         btnModif.style.cursor = 'pointer';
         editionDiv.appendChild(iconModif);
         editionDiv.insertBefore(iconModif, btnModif);
+
+        
     }
 
-    const token = localStorage.getItem('token');
-    if (token) {
-        // Le token est stocké, vous pouvez effectuer les actions nécessaires
-        editionMode();
-        console.log('Connexion au mode edition réussie')
-    }else{
-        console.log('Connexion echouée')
-    }
-
-    
     // Bouton "Tous"
     const btnTous = document.createElement("button");
     btnTous.classList.add('filtresBtn');

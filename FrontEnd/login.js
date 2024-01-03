@@ -15,9 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (emailValue === '' || passwordValue === '') {
             errorMsg.innerText = 'Veuillez remplir tous les champs.';
             errorMsg.style.opacity = "1";
-        }/* else if (emailValue != email || passwordValue != password) {
+        }else if (emailValue != email || passwordValue != password) {
             errorMsg.style.opacity = "1";
-        } */else {
+        }else {
             // Création de l'objet à envoyer
             const formData = {
                 email: emailValue,
@@ -34,8 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .then(tokenResponse => {
                 // Stockage du token d'authentification dans le localStorage
-                localStorage.setItem('token', tokenResponse.token);
-                console.log(localStorage)
+                sessionStorage.setItem('token', tokenResponse.token);
+                console.log(sessionStorage)
                 // Redirection vers index.html en cas de connexion réussie
                 window.location.href = 'index.html';
             })
