@@ -17,9 +17,12 @@ fetch("http://localhost:5678/api/works")
                 // Création des boutons de filtre
                 createFilterButtons(categories, allProjects);
             });
-            // Vérification du localStorage pour le token
-            
+
+            /* Affichage de la modale */
+            modalDisplay();
+            displayProjectsModal(allProjects);
     });
+
 
 // Fonction pour afficher les projets
 function displayProjects(projects) {
@@ -48,40 +51,6 @@ function createFilterButtons(categories, allProjects) {
     const portfolioSection = document.getElementById('portfolio');
     portfolioSection.insertBefore(filtersContainer, document.querySelector('.gallery'));
 
-    // Fonction pour afficher la page d'édition
-
-    function editionMode(){
-
-        filtersContainer.style.visibility = "hidden";
-
-        const btnModif = document.createElement('p');
-        btnModif.innerText = 'modifier';
-        btnModif.style.margin = '0 0 25px 7px';
-        btnModif.style.cursor = 'pointer';
-
-        const editionDiv = document.createElement('div');
-        editionDiv.classList.add('portfolio-head');
-        editionDiv.appendChild(document.querySelector('.portfolio-title'));
-        editionDiv.appendChild(btnModif);
-        portfolioSection.appendChild(editionDiv);
-        portfolioSection.insertBefore(editionDiv, document.querySelector('.filters-container'));;
-
-        const iconModif = document.createElement('i');
-        iconModif.classList.add('fa-regular', 'fa-pen-to-square');
-        iconModif.style.margin = '0 0 25px 25px';
-        btnModif.style.cursor = 'pointer';
-        editionDiv.appendChild(iconModif);
-        editionDiv.insertBefore(iconModif, btnModif);
-    }
-
-    const token = localStorage.getItem('token');
-    if (token) {
-        // Le token est stocké, vous pouvez effectuer les actions nécessaires
-        editionMode();
-        console.log('Connexion au mode edition réussie')
-    }else{
-        console.log('Connexion echouée')
-    }
 
     
     // Bouton "Tous"
@@ -109,3 +78,95 @@ function createFilterButtons(categories, allProjects) {
     });
 }
 
+
+/* MODALE */
+
+
+// Fonction pour afficher les projets dans la modale
+function displayProjectsModal(projects) {
+    const modalGallery = document.querySelector('.modal-gallery');
+    modalGallery.innerHTML = '';
+
+    projects.forEach((project) => {
+        const galleryFigure = document.createElement("figure");
+        const imageProject = document.createElement("img");
+        imageProject.src = project.imageUrl;
+        imageProject.alt = project.title;
+        const deleteDiv = document.createElement("div");
+        deleteDiv.classList.add('delete-div', 'delete-btn');
+        const deleteIcon = document.createElement("i");
+        deleteIcon.classList.add('fa-solid', 'fa-trash-can', 'delete-btn');
+
+        modalGallery.appendChild(galleryFigure);
+        galleryFigure.appendChild(imageProject);
+        galleryFigure.appendChild(deleteDiv);
+        galleryFigure.appendChild(deleteIcon);
+    });
+
+    /* Suppression des projets dans la modale */
+    document.querySelector('delete-btn').addEventListener('click', function(event){
+        const figure = event.target.closest('figure');
+
+        const workId = figure.project.id;
+
+        fetch (`http://localhost:5678/api/works/${workId}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization' : `Bearer ${token}`
+            }
+        })
+        .then(function(response){
+            if(response.ok){
+                displayProjectsModal();
+                displayProjects();
+            } else{
+                console.error('Erreur dans la suppression du projet');
+            }
+        })
+        .catch(function(error){
+            console.error('Erreur dans la suppression du projet', error);
+        })
+    })
+}
+
+/* Affichage de la modale */
+
+function modalDisplay(){
+
+    const modal = document.querySelector('.modal');
+    modal.style.display = 'none';
+    
+    document.querySelectorAll('.js-modal').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            modal.style.display = null;
+            
+        });
+    
+        document.querySelectorAll('.close').forEach(function (closeBtn) {
+            closeBtn.addEventListener('click', function () {
+                modal.style.display = 'none';
+            });
+        });
+    
+        document.addEventListener('click', function (e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    
+        window.addEventListener('keydown', function (e) {
+            if (e.key === "Escape" || e.key === "Esc") {
+                modal.style.display = 'none'
+            }
+        });
+    });
+
+}
+
+function editionBar(){
+    const editionBar = document.createElement('div');
+    editionBar.classList.add('edition-bar');
+    body.appendChild(editionBar)
+    body.insertBefore(editionBar, document.querySelector('.head-title'));
+}
