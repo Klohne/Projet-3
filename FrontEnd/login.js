@@ -26,12 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: JSON.stringify({email, password})
                 });
                     if(response.ok) {
-                        const data = await reponse.json();
+                        const data = await response.json();
                         // Stockage du token d'authentification dans le localStorage
                         sessionStorage.setItem('token', data.token);
                         console.log(sessionStorage)
                         // Redirection vers index.html en cas de connexion réussie
-                        /* window.location.href = 'index.html'; */
+                        window.location.href = 'index.html';
                     } else {
                         throw new Error('Erreur dans l\'identifiant ou le mot de passe' )
                     };
