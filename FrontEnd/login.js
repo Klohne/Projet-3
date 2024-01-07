@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         // Redirection vers index.html en cas de connexion réussie
                         window.location.href = 'index.html';
                     } else {
-                        throw new Error('Erreur dans l\'identifiant ou le mot de passe' )
+                        errorMsg.style.opacity = "1";
                     };
             } catch (error){
                 errorMsg.style.opacity = "1";

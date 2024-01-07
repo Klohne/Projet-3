@@ -67,6 +67,42 @@
 			</div>
 		</aside>
 
+		<aside id="modal2" class="modal">
+			<div class="modal-content">
+			  <div class="modal-head">
+				<span class="previous"><i class="fa-solid fa-arrow-left fa-2xl"></i></span>
+				<span class="close">&times;</span>
+				<h2>Ajout photo</h2>
+			  </div>
+				<div class="modal-gallery2">
+					<form action="" id="imageForm">
+						<label for="images" class="drop-container" id="dropcontainer">
+							<span class="cancel-img">&times;</span>
+							<span class="photo-icon"><i class="fa-regular fa-image fa-5x"></i></span>
+							<input type="file" id="fileInput" class="select-photo" accept="image/*" onchange="loadFile(event)">
+							<img id="output"/>
+							<input type="button" id="select-photo" class="select-photo" value="+ Ajouter photo" onclick="document.getElementById('fileInput').click();"></button>
+							<span class="format-span">jpg, png : 4mo max</span>
+						</label>
+						<label for="">Titre</label>
+						<input type="text" name="" id="titre">
+						<label for="">Catégorie</label>
+						<select name="categorie" id="categorie">
+							<option value="1">Objets</option>
+							<option value="2">Appartements</option>
+							<option value="3">Hôtels et Restaurants</option>
+						</select>
+						<div class="gallery-bottom">
+							<div class="gallery-line"></div>
+							<input class="valider-photo" type="submit" value="Valider" disabled="disabled">
+						</div>
+					</form>
+				</div>
+				
+			  </div>
+			</div>
+		</aside>
+
 
 		<!-- GALLERIE IMG -->
 
