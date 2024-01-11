@@ -3,19 +3,26 @@
    License: none (public domain)
 */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html,body,div,span,
+applet,object,iframe,h1,
+h2,h3,h4,h5,
+h6,p,blockquote,pre,a,
+abbr,acronym,address,big,
+cite,code,del,dfn,
+em,img,ins,kbd,q,s,samp,
+small,strike,strong,sub,
+sup,tt,var,b,
+u,i,center,dl,
+dt,dd,ol,ul,
+li,fieldset,form,label,
+legend,table,caption,tbody,
+tfoot,thead,tr,th,
+td,article,aside,canvas,
+details,embed,figure,figcaption,
+footer,header,hgroup,menu,
+nav,output,ruby,section,
+summary,time,mark,audio,
+video {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -23,48 +30,70 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
 	display: block;
 }
+
+html{
+	scroll-behavior: smooth;
+}
+
 body {
 	line-height: 1;
 	background: #FFFEF8;
 }
 
-ol, ul {
+ol,
+ul {
 	list-style: none;
 }
 
-blockquote, q {
+blockquote,
+q {
 	quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
 	content: '';
 	content: none;
 }
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
 
-a{
+a {
 	text-decoration: none;
 	color: black;
 }
 
-a:hover{
+a:hover {
 	color: #B1663C;
 }
 
-.login-active{
+.login-active {
 	font-weight: 700;
 }
+
 /** end reset css**/
 
-#headerNav .edition-bar{
+#headerNav .edition-bar {
 	height: 59px;
 	width: 100%;
 	background-color: black;
@@ -77,34 +106,35 @@ a:hover{
 	left: 0;
 }
 
-#headerNav .edition-bar div{
+#headerNav .edition-bar div {
 	display: flex;
-	align-items: center;}
+	align-items: center;
+}
 
-#headerNav .edition-bar *{
+#headerNav .edition-bar * {
 	color: white;
 }
 
-#headerNav .edition-bar p{
+#headerNav .edition-bar p {
 	margin-left: 15px;
 }
 
 body {
 	max-width: 1140px;
-	margin:auto;
-	font-family: 'Work Sans' ;
+	margin: auto;
+	font-family: 'Work Sans';
 	font-size: 14px;
 }
 
 
-#headerNav .nav{
+#headerNav .nav {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	margin-top: 20px;
 }
 
-#headerNav .head-title span{
+#headerNav .head-title span {
 	margin: 4px 0 0 0;
 	font-weight: 400;
 }
@@ -113,7 +143,7 @@ section {
 	margin: 50px 0
 }
 
-h1{
+h1 {
 	display: flex;
 	flex-direction: column;
 	font-family: 'Syne';
@@ -122,25 +152,27 @@ h1{
 	color: #B1663C
 }
 
-h1 > span {
+h1>span {
 	font-family: 'Work Sans';
-	font-size:10px;
+	font-size: 10px;
 	letter-spacing: 0.1em;
-;
+	;
 }
 
-h2{
+h2 {
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
 	color: #1D6154
 }
+
 nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
 
 }
+
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
@@ -149,13 +181,16 @@ nav li {
 li:hover {
 	color: #B1663C;
 }
+
 #introduction {
 	display: flex;
 	align-items: center;
 }
+
 #introduction figure {
 	flex: 1
 }
+
 #introduction img {
 	display: block;
 	margin: auto;
@@ -165,6 +200,7 @@ li:hover {
 #introduction article {
 	flex: 1
 }
+
 #introduction h2 {
 	margin-bottom: 1em;
 }
@@ -173,24 +209,40 @@ li:hover {
 	margin-bottom: 0.5em;
 }
 
+.fa-arrow-down-wide-short{
+	margin-right: 5px;
+}
+
 /* MODAL */
 
-#portfolio .modif-text{
+#portfolio .modif-text {
 	margin: 0 0 25px 7px;
 }
 
-#portfolio .modif-btn i{
+#portfolio .modif-filters{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	padding-bottom: 50px;
+}
+
+#portfolio .modif-filters .display-filters{
+	cursor: pointer;
+}
+
+#portfolio .modif-btn i {
 	margin: 0 0 25px 25px;
 }
 
-#portfolio .modif-btn{
+#portfolio .modif-btn {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	margin-bottom: 55px;
 	margin-top: 139px;
 }
-#portfolio .modif-link{
+
+#portfolio .modif-link {
 	margin-left: 20px;
 	margin-top: 5px;
 	display: flex;
@@ -198,57 +250,69 @@ li:hover {
 	align-items: center;
 }
 
-#portfolio .modif-link *{
+#portfolio .modif-link * {
 	margin-bottom: 0;
 }
 
-#portfolio .modif-link i{
+#portfolio .modif-link i {
 	margin: 0;
 }
 
 
 .modal {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
-  animation: fadeIn .3s both;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.4);
+	animation: fadeIn .3s both;
 }
 
 .modal-content {
-  background-color: #fefefe;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 630px;
-  height: fit-content;
-  text-align: center;
-  animation: slideFromTop .3s both;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+	background-color: #fefefe;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 630px;
+	height: fit-content;
+	text-align: center;
+	animation: slideFromTop .3s both;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
-.modal-content h2{
+
+@keyframes fadeIn {
+	from {opacity: 0;}
+	to {opacity: 1;	}
+}
+
+@keyframes slideFromTop {
+	from {transform: scale(0);}
+	to {transform: scale(100%);}
+}
+
+
+.modal-content h2 {
 	margin-top: 50px;
 	color: black;
 	font-family: 'Work Sans';
 	font-weight: 400;
 }
 
-.modal-gallery{
+.modal-gallery {
 	overflow: scroll;
 	width: fit-content;
 	height: 70%;
-	padding: 50px ;
+	padding: 50px;
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
 	grid-column-gap: 10px;
@@ -256,13 +320,13 @@ li:hover {
 	margin-bottom: 20px;
 }
 
-.modal-gallery2{
+.modal-gallery2 {
 	display: flex;
 	justify-content: center;
 	width: 100%;
 }
 
-.previous{
+.previous {
 	display: block;
 	position: absolute;
 	top: 3%;
@@ -270,7 +334,7 @@ li:hover {
 	cursor: pointer;
 }
 
-.modal-gallery2 form{
+.modal-gallery2 form {
 	height: 70%;
 	width: 100%;
 	padding: 0 50px;
@@ -284,22 +348,22 @@ li:hover {
 	margin-bottom: 30px;
 }
 
-.modal-gallery2 form label{
+.modal-gallery2 form label {
 	width: 90%;
 	color: #3D3D3D;
 }
 
-.modal-gallery2 form input{
+.modal-gallery2 form input {
 	height: 50px;
 	width: 90%;
 	border: none;
 	box-shadow: 0px 4px 14px 0px #00000017;
 	margin-bottom: 15px;
 	padding: 0;
-	
+
 }
 
-select{
+select {
 	height: 50px;
 	width: 90%;
 	border: none;
@@ -311,14 +375,14 @@ select{
 	margin-bottom: 20px;
 }
 
-select > option{
+select>option {
 	font-family: 'Work Sans', sans-serif;
 	color: #444444;
 }
 
-.modal-gallery2 form input:focus{
+.modal-gallery2 form input:focus {
 	outline: none;
-	box-shadow:inset 4px 4px 10px 0px #75757517;
+	box-shadow: inset 4px 4px 10px 0px #75757517;
 	transition: 0.2s;
 }
 
@@ -336,24 +400,24 @@ select > option{
 	border-radius: 3px;
 }
 
-#fileInput{
+#fileInput {
 	display: none;
 }
 
-#output{
+#output {
 	position: absolute;
 	height: 100%;
 }
-  
-.photo-icon{
+
+.photo-icon {
 	color: #B9C5CC;
 }
 
-.photo-icon i{
+.photo-icon i {
 	margin: 0;
 }
 
-#modal2 .drop-container input{
+#modal2 .drop-container input {
 	width: 40%;
 	height: 36px;
 	border: none;
@@ -367,56 +431,56 @@ select > option{
 	cursor: pointer;
 }
 
-#modal2 .drop-container input:hover{
+#modal2 .drop-container input:hover {
 	background-color: rgb(143, 143, 143);
 	color: white;
 }
 
-.format-span{
+.format-span {
 	color: #444444;
 }
 
-#modal2 .modal-gallery2 .gallery-line{
+#modal2 .modal-gallery2 .gallery-line {
 	width: 90%;
 }
 
-#modal2 .valider-photo{
+#modal2 .valider-photo {
 	width: 40%;
 	margin-bottom: 20px;
 	border: none;
 	color: white;
 }
 
-.gallery-bottom{
+.gallery-bottom {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	width: 100%;
 }
 
-.gallery-line{
+.gallery-line {
 	width: 65%;
 	height: 1px;
 	background-color: #B3B3B3;
 	margin-bottom: 30px;
 }
 
-.add-photo{
+.add-photo {
 	margin-bottom: 50px;
 }
 
-.modal-gallery figure{
+.modal-gallery figure {
 	width: 100%;
 	display: flex;
 	position: relative;
 }
 
-.modal-gallery img{
+.modal-gallery img {
 	width: 100%;
 	display: block;
 }
 
-.modal-gallery .fa-trash-can{
+.modal-gallery .fa-trash-can {
 	position: absolute;
 	right: 8px;
 	top: 13px;
@@ -424,7 +488,7 @@ select > option{
 	color: white;
 }
 
-.modal-gallery .delete-div{
+.modal-gallery .delete-div {
 	position: absolute;
 	top: 5px;
 	right: 5px;
@@ -436,45 +500,45 @@ select > option{
 
 }
 
-.close, .cancel-img {
-  color: black;
-  position: absolute;
-  font-size: 28px;
-  font-weight: bold;
-  top: 2%;
-  right: 4%
+.close,
+.cancel-img {
+	color: black;
+	position: absolute;
+	font-size: 28px;
+	font-weight: bold;
+	top: 2%;
+	right: 4%
 }
 
 .close:hover,
 .close:focus,
 .cancel-img:hover,
 .cancel-img:focus {
-  color: grey;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-@keyframes fadeIn{
-	from {opacity: 0;}
-	to {opacity: 1;}
-}
-
-@keyframes slideFromTop{
-	from {transform: translateY(-20px);}
-	to {transform: translateY(0px);}
+	color: grey;
+	text-decoration: none;
+	cursor: pointer;
 }
 
 /* PORTFOLIO */
 
-
 #portfolio .filters-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 40px; 
+	display: flex;
+	justify-content: center;
+	margin-bottom: 40px;
 	gap: 20px;
+	animation: opening 1s ;
 }
 
-#portfolio button{
+@keyframes opening{
+	from{
+		opacity: 0;
+	}
+	to{
+		opacity: 1;
+	}
+}
+
+#portfolio button {
 	height: 37px;
 	width: fit-content;
 	min-width: 100px;
@@ -490,12 +554,12 @@ select > option{
 	transition: 0.1s;
 }
 
-#portfolio button:hover{
+#portfolio button:hover {
 	background-color: #1D6154;
 	color: white;
 }
 
-.portfolio-head{
+.portfolio-head {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -515,24 +579,27 @@ select > option{
 	width: 100%;
 }
 
-.gallery figcaption{
+.gallery figcaption {
 	padding-top: 10px;
 }
 
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
-#contact > * {
+
+#contact>* {
 	text-align: center;
 
 }
-#contact h2{
+
+#contact h2 {
 	margin-bottom: 20px;
 }
+
 #contact form {
 	text-align: left;
-	margin-top:30px;
+	margin-top: 30px;
 	display: flex;
 	flex-direction: column;
 }
@@ -543,23 +610,25 @@ margin: auto;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
+
 #contact label {
 	margin: 2em 0 1em 0;
 }
+
 #contact textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"]{
+input[type="submit"] {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
 	background-color: #1D6154;
-	margin : 2em auto ;
+	margin: 2em auto;
 	width: 180px;
 	text-align: center;
-	border-radius: 60px ;
+	border-radius: 60px;
 }
 
 footer nav ul {
@@ -579,13 +648,16 @@ footer nav ul {
 	align-items: center;
 	margin-top: 150px;
 }
-#login > * {
+
+#login>* {
 	text-align: center;
 
 }
-#login h2{
+
+#login h2 {
 	height: 36px;
 }
+
 #login form {
 	text-align: left;
 	display: flex;
@@ -599,31 +671,33 @@ footer nav ul {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
+
 #login label {
 	margin: 2em 0 1em 0;
 }
+
 #login textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-#login #login-form-submit:active{
+#login #login-form-submit:active {
 	box-shadow: inset 1px 1px 50px 1px black;
 }
 
-input[type="submit"]{
+input[type="submit"] {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
 	background-color: #1D6154;
-	margin : 2em auto ;
+	margin: 2em auto;
 	width: 180px;
 	text-align: center;
-	border-radius: 60px ;
+	border-radius: 60px;
 	cursor: pointer;
 }
 
-#login a{
+#login a {
 	text-align: center;
 	text-decoration: underline;
 	margin-top: 20px;
@@ -638,9 +712,9 @@ input[type="submit"]{
 	display: grid;
 	justify-items: center;
 	align-items: center;
-  }
-  
-  #login-error-msg {
+}
+
+#login-error-msg {
 	width: 23%;
 	text-align: center;
 	margin: 0;
@@ -651,12 +725,11 @@ input[type="submit"]{
 	font-family: 'Work Sans';
 	opacity: 0;
 	border-radius: 60px;
-  }
+}
 
-.foot{
+.foot {
 	position: absolute;
 	bottom: 0;
 	right: 0;
 	margin-right: 5%;
 }
-

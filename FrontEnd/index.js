@@ -30,9 +30,6 @@ fetch("http://localhost:5678/api/works")
                 logout.href = 'index.html';
             });
 
-            const projetTitle = document.querySelector('.modif-btn')
-            projetTitle.style.margin = '139px 0 80px 0'
-
             editionBar();
             modalDisplay();
             displayProjectsModal(allProjects);
@@ -52,6 +49,14 @@ modal.style.display = 'none';
 /* Masquage de la 2eme modale */
 const modal2 = document.getElementById('modal2');
 modal2.style.display = 'none';
+
+const token = sessionStorage.getItem('token');
+
+if (!token) {
+    const modifFilters = document.querySelector('.modif-filters');
+    modifFilters.style.display = 'none'
+}
+
 
 
 // Fonction pour afficher les projets
@@ -78,48 +83,60 @@ function displayProjects(projects) {
 
 function createFilterButtons(categories, allProjects) {
 
-    const token = sessionStorage.getItem('token');
 
-    // Affichage des filtres uniquement si le token n'existe pas
-    if (!token) {
-        const filtersContainer = document.createElement("div");
-        filtersContainer.classList.add("filters-container");
+    const displayFilters = document.querySelector('.display-filters');
 
-        const portfolioSection = document.getElementById('portfolio');
-        portfolioSection.insertBefore(filtersContainer, document.querySelector('.gallery'));
+    const filtersContainer = document.createElement("div");
+    filtersContainer.classList.add("filters-container");
 
-        // Bouton "Tous"
-        const btnTous = document.createElement("button");
-        btnTous.classList.add('filtresBtn');
-        btnTous.innerText = "Tous";
-        // Afficher tous les projets au clic sur "Tous"
-        btnTous.addEventListener('click', function () {
-            displayProjects(allProjects);
-        });
-        filtersContainer.appendChild(btnTous);
+    const portfolioSection = document.getElementById('portfolio');
+    portfolioSection.insertBefore(filtersContainer, document.querySelector('.gallery'));
 
-        // Boutons pour chaque catégorie
-        categories.forEach((category) => {
-            const btnFilters = document.createElement("button");
-            btnFilters.classList.add('filtresBtn');
-            btnFilters.innerText = category.name;
-            btnFilters.addEventListener('click', function () {
-                const filteredProjects = allProjects.filter((project) => {
-                    return project.category.name === category.name;
-                });
-                displayProjects(filteredProjects); // Afficher les projets filtrés
+    // Bouton "Tous"
+    const btnTous = document.createElement("button");
+    btnTous.classList.add('filtresBtn');
+    btnTous.innerText = "Tous";
+    // Afficher tous les projets au clic sur "Tous"
+    btnTous.addEventListener('click', function () {
+        displayProjects(allProjects);
+    });
+    filtersContainer.appendChild(btnTous);
+
+    // Boutons pour chaque catégorie
+    categories.forEach((category) => {
+        const btnFilters = document.createElement("button");
+        btnFilters.classList.add('filtresBtn');
+        btnFilters.innerText = category.name;
+        btnFilters.addEventListener('click', function () {
+            const filteredProjects = allProjects.filter((project) => {
+                return project.category.name === category.name;
             });
-            filtersContainer.appendChild(btnFilters);
+            displayProjects(filteredProjects); // Afficher les projets filtrés
+        });
+        filtersContainer.appendChild(btnFilters);
+    });
+
+    /* Bouton pour Afficher / Cacher les filtres */
+
+    let filtersVisible = false; // Variable pour suivre l'état actuel des filtres
+
+    if (token) {
+        filtersContainer.style.display = 'none';
+        displayFilters.addEventListener('click', () => {
+            if (filtersVisible) {
+                filtersContainer.style.display = 'none';
+            } else {
+                filtersContainer.style.display = null; // ou 'flex' ou toute autre valeur selon la mise en page
+            }
+            filtersVisible = !filtersVisible; // Inversion de l'état des filtres
         });
     }
-
 };
-
 
 
 /* Nettoie champs modale2 */
 
-function clearModal(){
+function clearModal() {
     const output = document.getElementById('output');
     const selectPhotoInput = document.getElementById('select-photo');
     const titleInput = document.getElementById('titre');
@@ -235,7 +252,7 @@ function displayProjectsModal(projects) {
 }
 
 
-/* Barre du mode édition */
+/* Création de la barre du mode édition */
 
 function editionBar() {
 
@@ -261,8 +278,7 @@ function editionBar() {
 
 }
 
-
-/* Affichage de l'image à upload */
+/* Affichage de l'image à upload dans la modale */
 const loadFile = function (event) {
     const output = document.getElementById('output');
     output.src = URL.createObjectURL(event.target.files[0]);
@@ -276,15 +292,16 @@ const loadFile = function (event) {
     output.addEventListener('load', () => {
         selectPhotoInput.style.display = 'none';
     });
-
+    /* Réaffichage du bouton si annulation de l'upload */
     const cancelImage = document.querySelector('.cancel-img');
-    cancelImage.addEventListener('click', () =>{
+    cancelImage.addEventListener('click', () => {
         output.removeAttribute('src');
         selectPhotoInput.style.display = null;
         checkInputs();
     })
 };
 
+/* Vérification que les champs du formulaires sont tous remplis */
 const checkInputs = function () {
     const imageFormSubmit = document.querySelector('.valider-photo');
     const titreInput = document.getElementById('titre');
@@ -306,10 +323,6 @@ document.getElementById('select-photo').addEventListener('change', loadFile);
 document.getElementById('titre').addEventListener('input', checkInputs);
 
 
-/* Ajout des nouveaux projets à la galerie */
-
-
-// Fonction pour l'envoi des données du formulaire
 
 // Fonction pour l'envoi des données du formulaire
 async function addPhoto() {
@@ -335,63 +348,64 @@ async function addPhoto() {
         formData.append("title", title);
         formData.append("category", category);
 
+        /* Ajout des nouvelles images dans la galerie */
+        function addToGallery(project) {
+            const sectionGallery = document.querySelector('.gallery');
+            const galleryFigure = document.createElement("figure");
+            const imageProject = document.createElement("img");
+            imageProject.src = URL.createObjectURL(image);
+            imageProject.alt = project.title;
+            const titleProject = document.createElement("figcaption");
+            titleProject.innerText = project.title;
 
-    function addToGallery(project) {
-        const sectionGallery = document.querySelector('.gallery');
-        const galleryFigure = document.createElement("figure");
-        const imageProject = document.createElement("img");
-        imageProject.src = URL.createObjectURL(image);
-        imageProject.alt = project.title;
-        const titleProject = document.createElement("figcaption");
-        titleProject.innerText = project.title;
-    
-        sectionGallery.prepend(galleryFigure);
-        galleryFigure.appendChild(imageProject);
-        galleryFigure.appendChild(titleProject);
-    }
-
-            function addToModal(project){
-                const modalGallery = document.querySelector('.modal-gallery');    
-                
-                    const galleryFigure = document.createElement("figure");
-                    const imageProject = document.createElement("img");
-                    imageProject.src = URL.createObjectURL(image);
-                    imageProject.alt = project.title;
-                    const projectId = project.id;
-                    const deleteDiv = document.createElement("div");
-                    deleteDiv.classList.add('delete-div', 'delete-btn');
-                    const deleteIcon = document.createElement("i");
-                    deleteIcon.classList.add('fa-solid', 'fa-trash-can', 'fa-sm', 'delete-btn');
+            sectionGallery.prepend(galleryFigure);
+            galleryFigure.appendChild(imageProject);
+            galleryFigure.appendChild(titleProject);
             
-                    modalGallery.prepend(galleryFigure);
-                    galleryFigure.appendChild(imageProject);
-                    galleryFigure.appendChild(deleteDiv);
-                    galleryFigure.appendChild(deleteIcon);
+        }
 
-                    /* Suppression des projets dans la modale */
-                deleteIcon.addEventListener('click', async (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
+        /* Ajout des nouvelles images dans la modale */
+        function addToModal(project) {
+            const modalGallery = document.querySelector('.modal-gallery');
 
-                    const myToken = sessionStorage.getItem('token');
+            const galleryFigure = document.createElement("figure");
+            const imageProject = document.createElement("img");
+            imageProject.src = URL.createObjectURL(image);
+            imageProject.alt = project.title;
+            const projectId = project.id;
+            const deleteDiv = document.createElement("div");
+            deleteDiv.classList.add('delete-div', 'delete-btn');
+            const deleteIcon = document.createElement("i");
+            deleteIcon.classList.add('fa-solid', 'fa-trash-can', 'fa-sm', 'delete-btn');
 
-                    const response = await fetch(`http://localhost:5678/api/works/${projectId}`, {
-                        method: "DELETE",
-                        headers: {
-                            accept: "*/*",
-                            Authorization: `Bearer ${myToken}`,
-                        },
-                    });
-                    if (response.ok) {
-                        console.log(response);
-                        // Supprimer l'élément de la galerie modale
-                        galleryFigure.remove();
-                    } else {
-                        alert("Echec de suppression");
-                    }
+            modalGallery.prepend(galleryFigure);
+            galleryFigure.appendChild(imageProject);
+            galleryFigure.appendChild(deleteDiv);
+            galleryFigure.appendChild(deleteIcon);
+
+            /* Suppression des projets dans la modale */
+            deleteIcon.addEventListener('click', async (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const myToken = sessionStorage.getItem('token');
+
+                const response = await fetch(`http://localhost:5678/api/works/${projectId}`, {
+                    method: "DELETE",
+                    headers: {
+                        accept: "*/*",
+                        Authorization: `Bearer ${myToken}`,
+                    },
                 });
-            }
-
+                if (response.ok) {
+                    console.log(response);
+                    // Supprimer l'élément de la galerie modale
+                    galleryFigure.remove();
+                } else {
+                    alert("Echec de suppression");
+                }
+            });
+        }
         try {
             // Envoi des données
             const response = await fetch('http://localhost:5678/api/works', {
@@ -404,6 +418,9 @@ async function addPhoto() {
             if (response.ok) {
                 // Si la requête est réussie, effectuez les actions nécessaires ici
                 const newProject = await response.json(); // Supposons que la réponse renvoie les détails du nouveau projet
+                
+                // Ajouter le nouveau projet à la liste de tous les projets
+                
 
                 // Ajouter le nouveau projet à la galerie
                 addToGallery(newProject);
@@ -421,7 +438,6 @@ async function addPhoto() {
             console.error('Une erreur s\'est produite : ', error);
         }
     });
-    
 }
 
 // Appel de la fonction pour envoyer les données du formulaire
