@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const errorMsg = document.getElementById('login-error-msg');
 
     loginForm.addEventListener('submit', async function (event) {
-        event.preventDefault(); // Empêche l'envoi du formulaire par défaut
+        event.preventDefault();
 
         // Récupération des valeurs des champs
         const email = emailInput.value.trim();
