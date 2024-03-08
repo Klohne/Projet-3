@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
                     if(response.ok) {
                         const data = await response.json();
-                        // Stockage du token d'authentification dans le localStorage
+                        // Stockage du token d'authentification dans le sessionStorage
                         sessionStorage.setItem('token', data.token);
                         console.log(sessionStorage)
                         // Redirection vers index.html en cas de connexion réussie
