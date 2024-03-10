@@ -1,6 +1,6 @@
 //////////////////////////////
 /*  Récupération des projets */
-fetch("https://projet-3-ucub.onrender.com/api/works")
+fetch("http://localhost:5678/api/works")
     .then((response) => response.json())
     .then((projects) => {
         // Stockage des projets
@@ -10,7 +10,7 @@ fetch("https://projet-3-ucub.onrender.com/api/works")
         displayProjects(allProjects);
 
         // Récupération des catégories
-        fetch("https://projet-3-ucub.onrender.com/api/categories")
+        fetch("http://localhost:5678/api/categories")
             .then((response) => response.json())
             .then((categories) => {
                 // Stockage des catégories
@@ -213,7 +213,7 @@ function displayProjectsModal(projects) {
         deleteIcon.addEventListener('click', async (e) => {
             e.preventDefault();
 
-            const response = await fetch(`https://projet-3-ucub.onrender.com/api/works/${projectId}`, {
+            const response = await fetch(`http://localhost:5678/api/works/${projectId}`, {
                 method: "DELETE",
                 headers: {
                     accept: "*/*",
@@ -405,7 +405,7 @@ async function addPhoto() {
             deleteIcon.addEventListener('click', async (event) => {
                 event.preventDefault();
 
-                const response = await fetch(`https://projet-3-ucub.onrender.com/api/works/${projectId}`, {
+                const response = await fetch(`http://localhost:5678/api/works/${projectId}`, {
                     method: "DELETE",
                     headers: {
                         accept: "*/*",
@@ -431,7 +431,7 @@ async function addPhoto() {
         }
         try {
             // Envoi des valeurs pour l'ajout des images
-            const response = await fetch('https://projet-3-ucub.onrender.com/api/works', {
+            const response = await fetch('http://localhost:5678/api/works', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
