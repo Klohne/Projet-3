@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             try {
                 // Envoi des données
-                const response = await fetch('http://localhost:5678/api/users/login', {
+                const response = await fetch('https://projet-3-ucub.onrender.com/api/users/login', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
